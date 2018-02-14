@@ -3,5 +3,7 @@ language: java
 build:
   ci:
     - adduser --disabled-password --gecos "" ciuser
-    - chown -R ciuser:ciuser $SHIPPABLE_BUILD_DIR/../..
-    - su -c "mvn clean install -B" ciuser
+    - NEW_BUILD_DIR=/home/ciuser/newbuilddir
+    - cp -r $SHIPPABLE_BUILD_DIR $NEW_BUILD_DIR
+    - chown -R newuser:newuser $NEW_BUILD_DIR
+    - su -c "cd $NEW_BUILD_DIR && mvn clean install -B" ciuser
