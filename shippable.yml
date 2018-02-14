@@ -1,0 +1,7 @@
+language: java
+
+build:
+  ci:
+    - adduser --disabled-password --gecos "" ciuser
+    - chown -R ciuser:ciuser $SHIPPABLE_BUILD_DIR/..
+    - su -c "mvn clean install -B" ciuser
